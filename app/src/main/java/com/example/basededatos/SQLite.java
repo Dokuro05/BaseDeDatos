@@ -53,7 +53,7 @@ public class SQLite extends Activity {
                 String descripcionText = descripcion.getText().toString();
 
                 if (!palabraText.isEmpty() && !descripcionText.isEmpty()) {
-                    anadirPalabra(palabraText, descripcionText, "http://192.168.1.142/palabras/anadir_palabra.php");
+                    anadirPalabra(palabraText, descripcionText, "http://192.168.16.15/palabras/anadir_palabra.php");
                 } else {
                     Toast.makeText(getApplicationContext(), "Faltan datos", Toast.LENGTH_SHORT).show();
                 }
@@ -66,7 +66,10 @@ public class SQLite extends Activity {
                 String idText = id.getText().toString();
 
                 if (!idText.isEmpty()) {
-                    borrarPalabra(idText, "http://192.168.1.142/palabras/borrar_palabra.php");
+                    borrarPalabra(idText, "http://192.168.16.15/palabras/borrar_palabra.php");
+                    id.setText("");
+                    palabra.setText("");
+                    descripcion.setText("");
                 } else {
                     Toast.makeText(getApplicationContext(), "Falta el ID", Toast.LENGTH_SHORT).show();
                 }
@@ -81,7 +84,7 @@ public class SQLite extends Activity {
                 String descripcionText = descripcion.getText().toString();
 
                 if (!idText.isEmpty() && !palabraText.isEmpty() && !descripcionText.isEmpty()) {
-                    modificarPalabra(palabraText, descripcionText, idText, "http://192.168.1.142/palabras/modificar_palabra.php");
+                    modificarPalabra(palabraText, descripcionText, idText, "http://192.168.16.15/palabras/modificar_palabra.php");
                 } else {
                     Toast.makeText(getApplicationContext(), "Faltan datos", Toast.LENGTH_SHORT).show();
                 }
@@ -181,14 +184,14 @@ class Post {
 
             // Agregar parámetros según el botón pulsado
             switch (URL) {
-                case "http://192.168.1.142/palabras/anadir_palabra.php":
+                case "http://192.168.16.15/palabras/anadir_palabra.php":
                     builder.appendQueryParameter("palabra", params[0]);
                     builder.appendQueryParameter("descripcion", params[1]);
                     break;
-                case "http://192.168.1.142/palabras/borrar_palabra.php":
+                case "http://192.168.16.15/palabras/borrar_palabra.php":
                     builder.appendQueryParameter("id", params[0]);
                     break;
-                case "http://192.168.1.142/palabras/modificar_palabra.php":
+                case "http://192.168.16.15/palabras/modificar_palabra.php":
                     builder.appendQueryParameter("id", params[0]);
                     builder.appendQueryParameter("palabra", params[1]);
                     builder.appendQueryParameter("descripcion", params[2]);

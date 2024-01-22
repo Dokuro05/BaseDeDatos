@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BaseDeDatos</string>
+    <string-array name="array_technology">
+    </string-array>
 </resources>

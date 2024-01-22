@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class MostrarPalabras extends Activity {
 
     private ArrayList<String> palabras;
+    private ArrayList<String> definiciones;
     private ListView listView;
 
     @Override
@@ -30,17 +32,26 @@ public class MostrarPalabras extends Activity {
         setContentView(R.layout.palabras);
 
         palabras = new ArrayList<>();
+        definiciones = new ArrayList<>();
         listView = findViewById(R.id.listView);
 
         // Realizar la solicitud HTTP para obtener los datos de la base de datos
         new GetPalabrasTask().execute();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MostrarPalabras.this, definiciones.get(position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private class GetPalabrasTask extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... params) {
-            String url = "http://192.168.1.142/palabras/listar_palabras.php"; // Reemplaza con la URL de tu servidor y tu script PHP
+            String url = "http://192.168.16.15/palabras/listar_palabras.php"; // Reemplaza con la URL de tu servidor y tu script PHP
             try {
                 return obtenerDatos(url);
             } catch (IOException e) {
@@ -101,7 +112,9 @@ public class MostrarPalabras extends Activity {
                 for (int i = 0; i < palabrasArray.length(); i++) {
                     JSONObject palabraObj = palabrasArray.getJSONObject(i);
                     String palabra = palabraObj.getString("palabra");
+                    String definicion = palabraObj.getString("definicion");
                     palabras.add(palabra);
+                    definiciones.add(definicion);
                 }
 
                 // Actualizar el ListView

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/verpalabra"
+        android:title="Ver palabra" />
+    <item android:id="@+id/SQL"
+        android:title="SQL" />
+    <item android:id="@+id/salir"
+        android:title="Salir" />
+
+</menu>

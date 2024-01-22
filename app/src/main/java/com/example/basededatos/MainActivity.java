@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             String contrasena = params[1];
 
             Post post = new Post();
-            return post.getServerData(usuario, contrasena, "http://192.168.1.142/palabras/tabla_usuarios.php");
+            return post.getServerData(usuario, contrasena, "http://192.168.16.15/palabras/tabla_usuarios.php");
         }
 
         @Override
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject json_data = datos.getJSONObject(0);
                     int numRegistrados = json_data.getInt("id");
                     if (numRegistrados > 0) {
-                        Intent intent = new Intent(MainActivity.this, SQLite.class);
+                        Intent intent = new Intent(MainActivity.this, Ahorcado.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(getBaseContext(),
